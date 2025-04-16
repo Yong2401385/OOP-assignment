@@ -11,7 +11,7 @@ public class Lecturer extends Person{
 	private static int noOfLecturer =0;
 	//no-arg constructor
 	public Lecturer(){
-		this("", {"","",""}, {"","",""});
+		this("", new Course[3], new Exam[3]);
 			}
 	
 	//constructor with 3-arguments
@@ -46,25 +46,28 @@ public class Lecturer extends Person{
 	public void addCourse(Course courseID){
 		for(int i = 0; i < courseTaught.length; i++){
 			if(courseTaught[i] == null)
-				this.courseTaught[i] = courseID;	
+				this.courseTaught[i] = courseID;
+				break;	
 		}
 	}
 	
 	//toString
-	@override
+	@Override
 		public String toString(){
 			return 	super.toString() 
 				+	"\nLecturer ID \t: " + this.lecturerID
-				+	"\nCourse taught \t: " + Arrays.toString(this.getCourse())
+				+	"\nCourse taught \t: " + Arrays.toString(this.getCourseTaught())
 				+	"\nExam marked \t: " + Arrays.toString(this.getExamMarked());
 		}
 	
 	//equals
-	@override
-		public boolean equals(Lecturer lecturer){
-			if(lecturer instanceof Lecturer)
+	@Override
+		public boolean equals(Object obj){
+			if(this == obj)
 				return true;
-			else
+			if(obj == null || getClass() != obj.getClass()) 
 				return false;
+			Lecturer other = (Lecturer) obj;
+			return lecturerID != null && lecturerID.equals(other.lecturerID);
 		}
 }

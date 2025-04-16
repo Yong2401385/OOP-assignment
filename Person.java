@@ -35,4 +35,14 @@ public class Person{
 		return 	"Name \t: " + this.name
 			+	"\nEmail \t: " + this.email;
 	}
+	
+	@Override
+		public boolean equals(Object obj){
+			if(this == obj)
+				return true;
+			if(obj == null || getClass() != obj.getClass()) 
+				return false;
+			Person other = (Person) obj;
+			return email != null && email.equals(other.email);
+		}
 }
