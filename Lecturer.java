@@ -42,8 +42,8 @@ public class Lecturer extends Person{
 		return Lecturer.noOfLecturer;
 	}
 	
-	//addCourseTaught
-	public void addCourseTaught(Course courseID){
+	//addCourse
+	public void addCourse(Course courseID){
 		for(int i = 0; i < courseTaught.length; i++){
 			if(courseTaught[i] == null)
 				this.courseTaught[i] = courseID;	
@@ -51,10 +51,20 @@ public class Lecturer extends Person{
 	}
 	
 	//toString
-	public String toString(){
-		return 	super.toString() 
-			+	"\nLecturer ID \t: " + this.lecturerID
-			+	"\nCourse taught \t: " + Arrays.toString(this.getCourseTaught())
-			+	"\nExam marked \t: " + Arrays.toString(this.getExamMarked());
-	}
+	@override
+		public String toString(){
+			return 	super.toString() 
+				+	"\nLecturer ID \t: " + this.lecturerID
+				+	"\nCourse taught \t: " + Arrays.toString(this.getCourse())
+				+	"\nExam marked \t: " + Arrays.toString(this.getExamMarked());
+		}
+	
+	//equals
+	@override
+		public boolean equals(Lecturer lecturer){
+			if(lecturer instanceof Lecturer)
+				return true;
+			else
+				return false;
+		}
 }
