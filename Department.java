@@ -1,18 +1,20 @@
 // Yong Hao Cheng 2401385
 // DSF1S3
 
+import java.util.Arrays;
+
 public class Department {
 	private String departmentID;
 	private String departmentName;
-	private Lecturer associatedLecturer;
-	private Programme programmeList;
+	private Lecturer[] associatedLecturer = new Lecturer[5];
+	private Programme[] programmeList = new Programme[5];
 	
 	//constructors
 	public Department(){
-		this(" "," ",new Lecturer(),new Programme());
+		this(" "," ",new Lecturer[5],new Programme[5]);
 	}
 	public Department(String departmentID, String departmentName,
-	Lecturer associatedLecturer, Programme programmeList){
+	Lecturer[] associatedLecturer, Programme[] programmeList){
 		this.departmentID = departmentID;
 		this.departmentName = departmentName;
 		this.associatedLecturer = associatedLecturer;
@@ -26,10 +28,10 @@ public class Department {
 	public void setDepartmentName(String departmentName){
 		this.departmentName = departmentName;
 	}
-	public void setAssociatedLecture(Lecturer associatedLecturer){
+	public void setAssociatedLecture(Lecturer[] associatedLecturer){
 		this.associatedLecturer = associatedLecturer;
 	}
-	public void setProgrammeList(Programme programmeList){
+	public void setProgrammeList(Programme[] programmeList){
 		this.programmeList = programmeList;
 	}
 	//getter
@@ -39,10 +41,10 @@ public class Department {
 	public String DepartmentName(){
 		return departmentName;
 	}
-	public Lecturer AssociatedLecturer(){
+	public Lecturer[] AssociatedLecturer(){
 		return associatedLecturer;
 	}
-	public Programme ProgrammeList(){
+	public Programme[] ProgrammeList(){
 		return programmeList;
 	}
 	
@@ -50,8 +52,8 @@ public class Department {
 	public String toString(){
 		return "DepartmentID: " + departmentID
 				+ "\nDepartmentName: " + departmentName
-				+ "\nAssociated Lecturer: " + associatedLecturer
-				+ "\nProgramme List: " + programmeList;
+				+ "\nAssociated Lecturer: " + Arrays.toString(associatedLecturer)
+				+ "\nProgramme List: " + Arrays.toString(programmeList);
 	}
 	
 }
