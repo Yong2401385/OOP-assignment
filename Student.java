@@ -67,7 +67,7 @@ public class Student {
 
     @Override
     public String toString() {
-        return "StudentID: " + studentID + ", Year: " + yearOfStudy + ", Programme: " + programme.getProgrammeName();
+        return "StudentID: " + studentID + ", Year: " + yearOfStudy + ", Programme: " + programme.getProgrammeID();
     }
 
     public boolean equals(Object obj) {
