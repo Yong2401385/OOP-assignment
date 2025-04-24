@@ -11,11 +11,12 @@ public class Lecturer extends Person{
 	private static int noOfLecturer =0;
 	//no-arg constructor
 	public Lecturer(){
-		this("", new Course[3], new Exam[3]);
+		this("", "", 0, "", new Course[3], new Exam[3]);
 			}
 	
 	//constructor with 3-arguments
-	public Lecturer(String lecturerID, Course [] courseTaught, Exam [] examMarked){
+	public Lecturer(String name, String email, int contactNo, String lecturerID, Course [] courseTaught, Exam [] examMarked){
+		super(name, email, contactNo);
 		this.lecturerID = lecturerID;
 		System.arraycopy(courseTaught, 0, this.courseTaught, 0, 3);
 		System.arraycopy(examMarked, 0, this.examMarked, 0, 3);

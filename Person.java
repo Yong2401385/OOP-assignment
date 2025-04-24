@@ -1,17 +1,19 @@
 /*Vincent Chiew Jia Cheng 2402394
  *DSF Y1S3*/
 
-public class Person{
+public abstract class Person{
 	//data fields
 	private String name;
 	private String email;
+	private int contactNo;
 	
 	//no-arg constructor
-	public Person(){}
+	protected Person(){}
 	//constructor with 2-arguments
-	public Person(String name, String email){
+	protected Person(String name, String email, int contactNo){
 		this.name = name;
 		this.email = email;
+		this.contactNo = contactNo;
 	}
 	
 	//getters
@@ -21,6 +23,9 @@ public class Person{
 	public String getEmail(){
 		return this.email;
 	}
+	public int getContactNo(){
+		return this.contactNo;
+	}
 	
 	//setters
 	public void setName(String name){
@@ -29,11 +34,15 @@ public class Person{
 	public void setEmail(String email){
 		this.email = email;
 	}
+	public void setContactNo(int contactNo){
+		this.contactNo = contactNo;
+	}
 	
 	//toString
 	public String toString(){
 		return 	"Name \t: " + this.name
-			+	"\nEmail \t: " + this.email;
+			+	"\nEmail \t: " + this.email
+			+	"\nContact \t:" + this.contactNo;
 	}
 	
 	@Override
