@@ -17,8 +17,8 @@ public class Department {
 	Lecturer[] associatedLecturer, Programme[] programmeList){
 		this.departmentID = departmentID;
 		this.departmentName = departmentName;
-		this.associatedLecturer = associatedLecturer;
-		this.programmeList = programmeList;
+		this.associatedLecturer = (associatedLecturer != null) ? associatedLecturer : new Lecturer[5];
+		this.programmeList = (programmeList != null) ? programmeList : new Programme[5];
 	}
 	
 	//setter
@@ -28,24 +28,45 @@ public class Department {
 	public void setDepartmentName(String departmentName){
 		this.departmentName = departmentName;
 	}
-	public void setAssociatedLecture(Lecturer[] associatedLecturer){
+	public void setAssociatedLecturer(Lecturer[] associatedLecturer){
 		this.associatedLecturer = associatedLecturer;
 	}
 	public void setProgrammeList(Programme[] programmeList){
 		this.programmeList = programmeList;
 	}
 	//getter
-	public String DepartmentID(){
+	public String getDepartmentID(){
 		return departmentID;
 	}
-	public String DepartmentName(){
+	public String getDepartmentName(){
 		return departmentName;
 	}
-	public Lecturer[] AssociatedLecturer(){
-		return associatedLecturer;
+	public Lecturer[] getAssociatedLecturer(){
+		return Arrays.copyOf(associatedLecturer, associatedLecturer.length);
 	}
-	public Programme[] ProgrammeList(){
-		return programmeList;
+	public Programme[] getProgrammeList(){
+		return Arrays.copyOf(programmeList, programmeList.length);
+	}
+	
+	// Helper methods
+	public boolean addLecturer(Lecturer lecturer){
+		for (int i = 0; i < associatedLecturer.length; i++){
+			if (associatedLecturer[i] == null){
+				associatedLecturer[i] = lecturer;
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean addProgramme(Programme programme){
+		for (int i = 0; i < programmeList.length; i++){
+			if (programmeList[i] == null){
+				programmeList[i] = programme;
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	//toString
@@ -55,5 +76,4 @@ public class Department {
 				+ "\nAssociated Lecturer: " + Arrays.toString(associatedLecturer)
 				+ "\nProgramme List: " + Arrays.toString(programmeList);
 	}
-	
 }
