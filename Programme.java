@@ -7,21 +7,23 @@ public class Programme {
 	private String programmeID;
 	private String programmeLeader;
 	private int programmeDuration;
-	private Course[] courseList = new Course[15];
+	private Course[] courseList;
+	private int courseCount; // Track number of courses added
 	
-	//constructors
+	// constructors
 	public Programme(){
-		this(" "," ",0,new Course[15]);
+		this(" "," ",0);
 	}
-	public Programme(String programmeID, String programmeLeader,
-	int programmeDuration, Course[] courseList){
+	
+	public Programme(String programmeID, String programmeLeader,int programmeDuration){
 		this.programmeID = programmeID;
 		this.programmeLeader = programmeLeader;
 		this.programmeDuration = programmeDuration;
-		this.courseList = courseList;
+		this.courseList = new Course[15];
+		this.courseCount = 0;
 	}
 	
-	//setter
+	// setter
 	public void setProgrammeID(String programmeID){
 		this.programmeID = programmeID;
 	}
@@ -32,10 +34,14 @@ public class Programme {
 		this.programmeDuration = programmeDuration;
 	}
 	public void setCourseList(Course[] courseList){
-		this.courseList = courseList;
+		if (courseList != null){
+			this.courseList = Arrays.copyOf(courseList, Math.min(courseList.length, 15));
+			this.courseCount = countCourses();
+		}
+		
 	}
 	
-	//getter
+	// getter
 	public String getProgrammeID(){
 		return programmeID;
 	}
@@ -46,20 +52,31 @@ public class Programme {
 		return programmeDuration;
 	}
 	public Course[] getCourseList(){
-		return courseList;
+		return Arrays.copyOf(courseList, courseList.length);
 	}
 	
-	//addCourse
-	public void addCourse(Course course){
-		for(int i = 0; i < courseList.length; i++){
-			if(courseList[i] == null){
-				this.courseList[i] = course;
-				break;
+	// Helper method to count non-null courses
+	private int countCourses(){
+		int count = 0;
+		for (Course course : courseList){
+			if (course != null){
+				count++;
 			}
 		}
+		return count;
 	}
 	
-	//toString
+	// Add Course
+	public boolean addCourse(Course course){
+		if (course == null || courseCount >= courseList.length){
+			return false; // cannot add course
+		}
+		
+		courseList[courseCount++] = course;
+		return true;
+	}
+	
+	// toString
 	public String toString(){
 		return "ProgrammeID: " + programmeID 
 				+ "\nProgramme Leader: " + programmeLeader
