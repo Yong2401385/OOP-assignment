@@ -4,6 +4,7 @@
  *
  * @author 
  * @version 1.00 2025/4/15
+
  Low Jia MIng 24SMD09939
  DSF1S3
  */
@@ -45,16 +46,16 @@ public class Course {
     	this.exam = exam;
     }
     //getters
-    public String CourseID(){
+    public String getCourseID(){
 		return courseID;
 	}
-	public String CourseName(){
+	public String getCourseName(){
 		return courseName;
 	}
-	public int CreditHour(){
+	public int getCreditHour(){
 		return creditHour;
 	}
-    public int BatchYear(){
+    public int getBatchYear(){
 		return batchYear;
 	}
 	public Exam getExam(){
