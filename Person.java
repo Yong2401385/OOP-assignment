@@ -5,12 +5,14 @@ public abstract class Person{
 	//data fields
 	private String name;
 	private String email;
-	private int contactNo;
+	private String contactNo;
 	
 	//no-arg constructor
-	protected Person(){}
+	protected Person(){
+		this("", "", "");
+	}
 	//constructor with 2-arguments
-	protected Person(String name, String email, int contactNo){
+	protected Person(String name, String email, String contactNo){
 		this.name = name;
 		this.email = email;
 		this.contactNo = contactNo;
@@ -23,7 +25,7 @@ public abstract class Person{
 	public String getEmail(){
 		return this.email;
 	}
-	public int getContactNo(){
+	public String getContactNo(){
 		return this.contactNo;
 	}
 	
@@ -34,7 +36,7 @@ public abstract class Person{
 	public void setEmail(String email){
 		this.email = email;
 	}
-	public void setContactNo(int contactNo){
+	public void setContactNo(String contactNo){
 		this.contactNo = contactNo;
 	}
 	
@@ -42,7 +44,7 @@ public abstract class Person{
 	public String toString(){
 		return 	"Name \t: " + this.name
 			+	"\nEmail \t: " + this.email
-			+	"\nContact \t:" + this.contactNo;
+			+	"\nContact\t: " + this.contactNo;
 	}
 	
 	@Override

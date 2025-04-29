@@ -11,11 +11,11 @@ public class Lecturer extends Person{
 	private static int noOfLecturer =0;
 	//no-arg constructor
 	public Lecturer(){
-		this("", "", 0, "", new Course[3], new Exam[3]);
+		this("", "", "", "", new Course[3], new Exam[3]);
 			}
 	
 	//constructor with 3-arguments
-	public Lecturer(String name, String email, int contactNo, String lecturerID, Course [] courseTaught, Exam [] examMarked){
+	public Lecturer(String name, String email, String contactNo, String lecturerID, Course [] courseTaught, Exam [] examMarked){
 		super(name, email, contactNo);
 		this.lecturerID = lecturerID;
 		System.arraycopy(courseTaught, 0, this.courseTaught, 0, 3);
@@ -57,8 +57,9 @@ public class Lecturer extends Person{
 		public String toString(){
 			return 	super.toString() 
 				+	"\nLecturer ID \t: " + this.lecturerID
-				+	"\nCourse taught \t: " + Arrays.toString(this.getCourseTaught())
-				+	"\nExam marked \t: " + Arrays.toString(this.getExamMarked());
+				+	"\nCourse taught \t: " + this.courseTaught[0].getCourseID() + ", " + this.courseTaught[1].getCourseID() + ", " + this.courseTaught[2].getCourseID()
+				+	"\nExam marked \t: " + this.examMarked[0].getExamID() + ", " + this.examMarked[1].getExamID() + ", " + this.examMarked[2].getExamID()
+				+ 	"\nNumber of lecturers: " + Lecturer.noOfLecturer;
 		}
 	
 	//equals
