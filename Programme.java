@@ -8,7 +8,7 @@ public class Programme {
 	private String programmeLeader;
 	private int programmeDuration;
 	private Course[] courseList;
-	private int courseCount; // Track number of courses added
+	private static int courseCount; // Track number of courses added
 	
 	// constructors
 	public Programme(){
