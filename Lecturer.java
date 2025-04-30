@@ -18,8 +18,8 @@ public class Lecturer extends Person{
 	public Lecturer(String name, String email, String contactNo, String lecturerID, Course [] courseTaught, Exam [] examMarked){
 		super(name, email, contactNo);
 		this.lecturerID = lecturerID;
-		System.arraycopy(courseTaught, 0, this.courseTaught, 0, 3);
-		System.arraycopy(examMarked, 0, this.examMarked, 0, 3);
+		System.arraycopy(courseTaught, 0, this.courseTaught, 0, courseTaught.length);
+		System.arraycopy(examMarked, 0, this.examMarked, 0, examMarked.length);
 		Lecturer.noOfLecturer++;
 	}
 	
