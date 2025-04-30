@@ -20,7 +20,7 @@ public class Programme {
 		this.programmeLeader = programmeLeader;
 		this.programmeDuration = programmeDuration;
 		this.courseList = new Course[15];
-		this.courseCount = 0;
+		courseCount = 0;
 	}
 	
 	// setter
@@ -36,7 +36,7 @@ public class Programme {
 	public void setCourseList(Course[] courseList){
 		if (courseList != null){
 			this.courseList = Arrays.copyOf(courseList, Math.min(courseList.length, 15));
-			this.courseCount = countCourses();
+			courseCount = countCourses();
 		}
 		
 	}
@@ -53,6 +53,9 @@ public class Programme {
 	}
 	public Course[] getCourseList(){
 		return Arrays.copyOf(courseList, courseList.length);
+	}
+	public static int getCourseCount(){
+		return courseCount;
 	}
 	
 	// Helper method to count non-null courses
@@ -72,7 +75,8 @@ public class Programme {
 			return false; // cannot add course
 		}
 		
-		courseList[courseCount++] = course;
+		courseList[courseCount] = course;
+		courseCount++;
 		return true;
 	}
 	
