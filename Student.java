@@ -8,18 +8,23 @@ public class Student extends Person {
     private int yearOfStudy;
     private Course[] courseList;
     private Programme programme;
-    private Result result;
+    private Result[] result;
     private Exam[] examList;
+    private double GPA;
+    private double CGPA = 0;
 
     // constructor
-    public Student(String name, String email, String contactNo, String studentID, int yearOfStudy, Course[] courseList, Programme programme, Result result, Exam[] examList) {
+    public Student(String name, String email, String contactNo, String studentID, int yearOfStudy, Course[] courseList, Programme programme, Result[] result, Exam[] examList) {
         super(name, email, contactNo);
         this.studentID = studentID;
         this.yearOfStudy = yearOfStudy;
         this.courseList = courseList != null ? Arrays.copyOf(courseList, courseList.length) : new Course[0];
         this.programme = programme;
         this.result = result;
+        this.result = result != null ? Arrays.copyOf(result, result.length) : new Result[0];
         this.examList = examList != null ? Arrays.copyOf(examList, examList.length) : new Exam[0];
+        this.GPA = calcGPA(result);
+        this.CGPA += GPA;
     }
 
     // setters
@@ -39,21 +44,27 @@ public class Student extends Person {
         this.programme = programme;
     }
 
-    public void setResult(Result result) {
-        this.result = result;
+    public void setResult(Result[] result) {
+        this.result = Arrays.copyOf(result, result.length);
     }
 
     public void setExamList(Exam[] examList) {
         this.examList = Arrays.copyOf(examList, examList.length);
     }
+    public void setGPA(double GPA){
+    	this.GPA = GPA;
+    }
+    public void setCGPA(double CGPA){
+    	this.CGPA = CGPA;
+    }
 
     // getters
     public String getStudentID() {
-        return studentID;
+        return this.studentID;
     }
 
     public int getYearOfStudy() {
-        return yearOfStudy;
+        return this.yearOfStudy;
     }
 
     public Course[] getCourseList() {
@@ -61,11 +72,17 @@ public class Student extends Person {
     }
 
     public Programme getProgramme() {
-        return programme;
+        return this.programme;
     }
 
-    public Result getResult() {
-        return result;
+    public Result[] getResult() {
+        return Arrays.copyOf(result, result.length);
+    }
+    public double getGPA(){
+    	return this.GPA;
+    }
+    public double getCGPA(){
+    	return this.CGPA;
     }
 
     public Exam[] getExamList() {
@@ -96,14 +113,36 @@ public class Student extends Person {
                            .toArray(Course[]::new);
     }
     
+    //calcGPA
+    public double calcGPA(Result[] result){
+    	double total = 0;
+    	for(Result res: result){
+    		String grade = res.getGrade();
+    		if(grade == "A+" || grade == "A") total += 4.0;
+    		else if(grade == "A-") total += 3.67;
+    		else if(grade == "B") total += 3.0;
+    		else if(grade == "C") total += 2.0;
+    		else if(grade == "F") total += 0.0;
+    	}
+    	double length = result.length;
+    	if(length == 0){
+    		this.GPA = 0.0;
+    	}
+    	double GPA = total/length;
+    	return GPA;
+    }
+    
+    @Override
     // tostring
     public String toString() {
         return super.toString() +
-               "\nStudentID: " + studentID +
-               "\nYear: " + yearOfStudy +
+               "\nStudentID: " + this.studentID +
+               "\nYear: " + this.yearOfStudy +
                "\nProgramme: " + (programme != null ? programme.getProgrammeID() : "None") +
                "\nCourses: " + Arrays.toString(courseList) +
-               "\nResult: " + (result != null ? result.toString() : "No result");
+               "\nResult:\n" + Arrays.toString(result) +
+               "\nGPA: " + this.GPA +
+               "\nCGPA: " + this.CGPA;
     }
     
     // equals

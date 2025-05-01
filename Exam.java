@@ -89,12 +89,11 @@ public class Exam {
 	}
 	//toStirng
     public String toString(){
-    	return "Exam ID : " + examID 
+    	return "\nExam ID : " + examID 
     		+ "\nExam Date : " + examDate 
     		+ "\nTime : " + startTime + " ~ " +  endTime 
     		+ "\nDuration : " + duration 
     		+ "\nVenue : " + venue 
-    		+ "\nNumber of Examinations currently : " + numberOfExamination
     		;
     }
 }

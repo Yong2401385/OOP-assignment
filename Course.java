@@ -4,7 +4,6 @@
  *
  * @author 
  * @version 1.00 2025/4/15
-
  Low Jia MIng 24SMD09939
  DSF1S3
  */
@@ -63,10 +62,10 @@ public class Course {
 	}
 	//toString
 	public String toString(){
-		return "CourseID : " + courseID
+		return "\nCourseID : " + courseID
 			+ "\nCourseName : " + courseName
-			+ "Credit Hour : " + creditHour
-			+ "Batch Year : " + batchYear
+			+ "\nCredit Hour : " + creditHour
+			+ "\nBatch Year : " + batchYear
 			+ exam.toString()
 			;
 	}

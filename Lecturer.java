@@ -70,6 +70,6 @@ public class Lecturer extends Person{
 			if(obj == null || getClass() != obj.getClass()) 
 				return false;
 			Lecturer other = (Lecturer) obj;
-			return lecturerID != null && lecturerID.equals(other.lecturerID);
+			return lecturerID != null && this.lecturerID.equals(other.lecturerID);
 		}
 }
