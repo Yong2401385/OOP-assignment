@@ -44,7 +44,7 @@ public class UniversityExaminationSystem{
 		
 		Department d1 = new Department("DCIT", "Department of Computing And Information Technology", new Lecturer[] {lectArr[0]}, new Programme[] {p1, p2});
 		
-		Student[] studArr = new Student[3];
+		Student[] studArr = new Student[10];
 		studArr[0] = new Student("Alvin", "alvin@student.tarc.edu.my", "011234567", "2400001", 1, new Course[] {courArr[0], courArr[1], courArr[2]}, p1,new Result[] {r1, r2}, new Exam[] {examArr[0], examArr[1], examArr[2]});
 		studArr[1] = new Student("Ben", "ben@student.tarc.edu.my", "019345678", "2400002", 1, new Course[] {courArr[0], courArr[1], courArr[2]}, p2,new Result[] {r2, r3}, new Exam[] {examArr[0], examArr[1], examArr[2]});
 		studArr[2] = new Student("Carl", "carl@student.tarc.edu.my", "018234567", "2300003", 2, new Course[] {courArr[0], courArr[1], courArr[2]}, p1,new Result[] {r1, r3}, new Exam[] {examArr[0], examArr[1], examArr[2]});
@@ -57,8 +57,8 @@ public class UniversityExaminationSystem{
 		choice = checkChoice();
 				
 		switch(choice){
-			case 1:	lecturerModule(lectArr); break;
-			case 2: studentModule(studArr); break;
+			case 1:	{lecturerModule(lectArr, studArr); break;}
+			case 2: {studentModule(studArr); break;}
 		}
 		
 	}
@@ -80,15 +80,16 @@ public class UniversityExaminationSystem{
 		return input;
 	}
 	
-	public static void lecturerModule(Lecturer[] lectArr){
+	public static void lecturerModule(Lecturer[] lectArr, Student[] studArr){
 		int input = 0;
 		boolean continueInput = true;
 		String id = "";
+		Lecturer lecturer = new Lecturer();
 		do{
 			try{
 				System.out.println("Please enter your lecturer ID:");
 				id = scanner.next();
-				Lecturer lecturer = findLecturer(id, lectArr);
+				lecturer = findLecturer(id, lectArr);
 				System.out.println("------------------------------------------------");
 				System.out.println("Welcome Lecturer " + lecturer.getName() + "!");
 				continueInput = false;	
@@ -106,10 +107,10 @@ public class UniversityExaminationSystem{
 		System.out.println("What would you like to do?");
 		
 		input = checkChoice();	
-	//	switch(input){
-	//		case 1: checkStudResult(); break;
+		switch(input){
+			case 1: {checkStudResult(lecturer, studArr); break;}
 		//	case 2: scheduleNewExam(); break;
-	//	}
+		}
 	}
 		//helper method to find lecturer with specific id
 		private static Lecturer findLecturer(String id, Lecturer[] lectArr){
@@ -119,6 +120,10 @@ public class UniversityExaminationSystem{
 								
 		throw new IllegalArgumentException("Lecturer Not Found");
 	}	
+		
+	public static void checkStudResult(Lecturer lecturer, Student[] studArr){
+		TestLecturerGrading.Grade(lecturer, studArr);
+	}
 	
 	public static void studentModule(Student[] studArr){
 		int input = 0;
@@ -154,13 +159,20 @@ public class UniversityExaminationSystem{
 	}
 	
 	public static void checkResult(Student student){
-		
-		System.out.println("=================Exam Results=================");
+		System.out.println("============================Exam Results============================");
 		System.out.printf("%-10s %-40s %-10s %-10s\n", "CourseID", "Course Name", "Mark", "Grade");
-		for(Result result: student.getResult()){
+		System.out.println("--------------------------------------------------------------------");
+		Result[] results = student.getResult();
+		if(results == null || results.length ==0){
+			System.out.println("No results found for this student");
+			return;
+		}
+		for(Result result: results){
 			System.out.printf("%-10s %-40s %-10s %-10s\n", result.getCourse().getCourseID(), result.getCourse().getCourseName(), result.getMark(), result.getGrade());
 		}
-		System.out.printf("%-60s %-.2f", "GPA: ", student.getGPA());
+		System.out.println("--------------------------------------------------------------------");
+		System.out.printf("%-60s %5.2f", "GPA: ", student.getGPA());
+		System.out.println("\n====================================================================");
 	}
 	
 	//helper method to find student with specific id

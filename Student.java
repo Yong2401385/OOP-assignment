@@ -23,6 +23,7 @@ public class Student extends Person {
         this.yearOfStudy = yearOfStudy;
         this.courseList = courseList != null ? Arrays.copyOf(courseList, courseList.length) : new Course[0];
         this.programme = programme;
+        this.result = result;
         this.result = result != null ? Arrays.copyOf(result, result.length) : new Result[0];
         this.examList = examList != null ? Arrays.copyOf(examList, examList.length) : new Exam[0];
         calcGPA(result);
@@ -120,12 +121,14 @@ public class Student extends Person {
     	double total = 0;
     	String grade;
     	for(Result res: result){
+    		if(res != null){
     		grade = res.getGrade();
     		if(grade == "A+" || grade == "A") total += 4.0;
     		else if(grade == "A-") total += 3.67;
     		else if(grade == "B") total += 3.0;
     		else if(grade == "C") total += 2.0;
     		else total += 0.0;
+    		}
     	}
     	double length = result.length;
     	if(length == 0){

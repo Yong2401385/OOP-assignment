@@ -10,7 +10,7 @@ import java.util.Arrays;
 
 public class TestLecturerGrading {
 
-    public static void main(String[] args) {
+    public static void TestLecturerGrading() {
     	//initialization
     	Exam DSF_Exam = new Exam("123","0001-01-01", "12:12", 1.5,"B1");
     	Course DSF = new Course("123", "DSF", 4, 1021, DSF_Exam);
@@ -71,11 +71,12 @@ public class TestLecturerGrading {
         int ii = 0;
         for (Student student:student_list){
         	//if contains, true if not, false
-        	for (Exam exam:student.getExamList()){
-        	  if (exam.getExamID() == examID){
-        		new_student_list[ii] = student;
-        		continue;
-        	}
+        	if(student.getExamList() != null)
+        	for (Exam exam: student.getExamList()){
+        		if (exam.getExamID() == examID){
+        			new_student_list[ii] = student;
+        			continue;
+        		}
         	}
         	ii++;
         } 
@@ -89,7 +90,7 @@ public class TestLecturerGrading {
           double marks = 0;
           	for (Result actual_result: result){
           		if (actual_result.getCourse().getCourseName() == courselist[list_num-1].getCourseName()){
-          			marks = actual_result.getMarks();
+          			marks = actual_result.getMark();
           			break;
           		}
           	}
@@ -118,7 +119,7 @@ public class TestLecturerGrading {
           	    double new_marks = 0;
           	    for (Result result2: result_to_grade){
           	     	if (result2.getCourse().getCourseName() == courselist[list_num-1].getCourseName()){
-          			new_marks = result2.getMarks();
+          			new_marks = result2.getMark();
           	     	}
           	    }
           	    System.out.println("Student Name :" + new_student_list[num-1].getName() + "\tNew Marks :" + new_marks);
