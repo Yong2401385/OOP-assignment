@@ -6,6 +6,7 @@ public class UniversityExaminationSystem{
 	static Scanner scanner = new Scanner(System.in);
 	public static void main(String[] args){
 		int choice = 0;
+		boolean end = false;
 		Exam[] examArr = new Exam [10];
 		//no need argument of end time because system will calculate start time + duration
 		examArr[0] = new Exam("E1","2020-02-11", "09:00", 2, "D1 Hall");
@@ -23,6 +24,7 @@ public class UniversityExaminationSystem{
 		
 		Course[] cocuArr = new Course[10];
 		cocuArr[0] = new Course("K1", "Karate Do", 1, 1, examArr[3]);
+		cocuArr[1] = new Course("K2", "Tae Kwon Do", 1, 1, examArr[3]);
 
 		Programme p1 = new Programme("DSF", "Pn. Surayaini", 2);
 		Programme p2 = new Programme("DFT", "Dr. Christopher", 2);
@@ -63,25 +65,27 @@ public class UniversityExaminationSystem{
 		studArr[2] = new Student("Carl", "carl@student.tarc.edu.my", "018234567", "2300003", 2, new Course[] {courArr[0], courArr[1], courArr[2]}, p1,new Result[] {r1, r2, r3}, new Exam[] {examArr[0], examArr[1], examArr[2]});
 		studArr[3] = new Student("David", "david@student.tarc.edu.my", "017234567", "2400003", 1, new Course[] {courArr[3], courArr[4], courArr[5]}, p2,new Result[] {r4,r5,r6}, new Exam[] {examArr[0], examArr[4], examArr[2]});
 		
-		System.out.println("------------------------------------------------");
-		System.out.println("Welcome to TARUMT University Examination System!");
-		System.out.println("1 - Lecturer \n2 - Student");
-		System.out.println("------------------------------------------------");	
-		System.out.println("Please choose your role:");
-		choice = checkChoice();
-				
-		switch(choice){
-			case 1:	lecturerModule(lectArr, studArr); break;
-			case 2: studentModule(studArr, cocuArr); break;
-			case 3: break;
-		}
+		do{
+			System.out.println("------------------------------------------------");
+			System.out.println("Welcome to TARUMT University Examination System!");
+			System.out.println("1 - Lecturer \n2 - Student \n3 - Exit");
+			System.out.println("------------------------------------------------");	
+			System.out.println("Please choose your role:");
+			choice = checkChoice();
+					
+			switch(choice){
+				case 1:	lecturerModule(lectArr, studArr, examArr); break;
+				case 2: studentModule(studArr, cocuArr); break;
+				case 3: System.out.println("End of session"); scanner.close(); return;
+			}
+		}while(!end);
+		
 		
 	}
 	
 	public static int checkChoice(){
 		int input = 0;
 		boolean continueInput = true;
-		boolean again = true;
 		do{
 			try {
 				input = scanner.nextInt();	
@@ -96,13 +100,12 @@ public class UniversityExaminationSystem{
 		return input;
 	}
 	
-	public static void lecturerModule(Lecturer[] lectArr, Student[] studArr){
+	public static void lecturerModule(Lecturer[] lectArr, Student[] studArr, Exam[] examArr){
 		int input = 0;
 		boolean continueInput = true;
 		boolean again = true;
 		String id = "";
 		Lecturer lecturer = new Lecturer();
-		do{
 			do{
 				try{
 					System.out.println("Please enter your lecturer ID:");
@@ -119,18 +122,18 @@ public class UniversityExaminationSystem{
 					System.out.println("Something went wrong");
 				}
 			}while(continueInput);
-			
-			System.out.println("1 - Check and modify student result \n2 - Schedule new exam \n3 - Return");
-			System.out.println("------------------------------------------------");
-			System.out.println("What would you like to do?");
-			
-			input = checkChoice();	
-			switch(input){
-				case 1: {checkStudResult(lecturer, studArr); break;}
-			//	case 2: scheduleNewExam(); break;
-				case 3: again = false; break;
-			}
-	}while(again);
+			do{
+				System.out.println("1 - Check and modify student result \n2 - Schedule new exam \n3 - Return");
+				System.out.println("------------------------------------------------");
+				System.out.println("What would you like to do?");
+				
+				input = checkChoice();	
+				switch(input){
+					case 1: checkStudResult(lecturer, studArr); break;
+					case 2: scheduleNewExam(examArr); break;
+					case 3: again = false; return;
+				}
+			}while(again);
 	}
 		//helper method to find lecturer with specific id
 		private static Lecturer findLecturer(String id, Lecturer[] lectArr){
@@ -148,6 +151,7 @@ public class UniversityExaminationSystem{
 	public static void studentModule(Student[] studArr, Course[] cocuArr){
 		int input = 0;
 		boolean continueInput = true;
+		boolean again = true;
 		String id = "";	
 		Student student = new Student();
 		do{	
@@ -166,16 +170,19 @@ public class UniversityExaminationSystem{
 				System.out.println("Something went wrong.");
 			}
 		}while(continueInput);
-		System.out.println("What would you like to do?");
-		System.out.println("1 - Check result \n2 - Register new course");
-		System.out.println("------------------------------------------------");
-		
-		input = checkChoice();
-		
-		switch(input){
-			case 1: checkResult(student);
-			case 2: registerCourse(student, cocuArr);
-		}
+		do{
+			System.out.println("What would you like to do?");
+			System.out.println("1 - Check result \n2 - Register new course \n3 - Return");
+			System.out.println("------------------------------------------------");
+			
+			input = checkChoice();
+			
+			switch(input){
+				case 1: checkResult(student);
+				case 2: registerCourse(student, cocuArr);
+				case 3: again = false; return;
+			}
+		}while(again);
 	}
 	
 	public static void checkResult(Student student){
@@ -188,6 +195,7 @@ public class UniversityExaminationSystem{
 			return;
 		}
 		for(Result result: results){
+			if(result != null && result.getCourse() != null && result.getMark() != 0 && result.getGrade() != null)
 			System.out.printf("%-10s %-40s %-10s %-10s\n", result.getCourse().getCourseID(), result.getCourse().getCourseName(), result.getMark(), result.getGrade());
 		}
 		System.out.println("--------------------------------------------------------------------");
@@ -207,5 +215,9 @@ public class UniversityExaminationSystem{
 	private static void registerCourse(Student student, Course[] cocuArr){
 		LoginSystem.viewCourses(student);
 		LoginSystem.addCocurricularCourse(student, cocuArr);
+	}
+	
+	private static void scheduleNewExam(Exam[] examArr){
+		lectureinput.addExam(examArr);
 	}
 }

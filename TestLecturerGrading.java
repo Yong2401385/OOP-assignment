@@ -71,37 +71,45 @@ public class TestLecturerGrading {
         int ii = 0;
         for (Student student:student_list){
         	//if contains, true if not, false
-        	if(student.getExamList() != null)
-        	for (Exam exam: student.getExamList()){
-        		if (exam.getExamID() == examID){
+        	if(student == null)
+        		continue;
+        	
+        	Exam[] examList = student.getExamList();
+        	if(examList != null)
+        	for (Exam exam: examList){
+        		if(exam == null)
+        			continue;
+        			
+        		if(exam.getExamID() == examID){
         			new_student_list[ii] = student;
+        			ii++;
         			continue;
         		}
         	}
-        	ii++;
-        } 
-        System.out.println("    Name\tMarks");
-        System.out.println("    ---------\t----------");
+        }
+        System.out.printf("%-20s %-20s", "Name", "Marks");
+        System.out.printf("\n%-20s %-20s", "---------", "----------");
 //see which result in the result array have course intended to grade and get the mark of the result
 		int iii = 0;
         for (Student student:new_student_list){
          if (student != null){
           Result[] result = student.getResult();
           double marks = 0;
+          if(result != null)
           	for (Result actual_result: result){
-          		if (actual_result.getCourse().getCourseName() == courselist[list_num-1].getCourseName()){
+          		if (actual_result != null && actual_result.getCourse() != null && actual_result.getCourse().getCourseName().equals(courselist[list_num-1].getCourseName())){
           			marks = actual_result.getMark();
           			break;
           		}
           	}
           iii++;
-    	  System.out.println((iii) + ". " + student.getName() + "      " + marks);
+    	  System.out.printf("\n%1d %1s %-20s %-1.2f",(iii), ". ", student.getName(), marks);
     	  //options to grade or quit
         }
     	}
     	boolean end1 = false;
     	do {
-    	  	System.out.println("Enter 1 to grade, Enter 2 to back: ");
+    	  	System.out.println("\nEnter 1 to grade, Enter 2 to back: ");
     	  	int CHOICE = scanner.nextInt();
     	  	switch(CHOICE){
     	  		case 1:
@@ -110,7 +118,7 @@ public class TestLecturerGrading {
     	  			System.out.println("How many marks?: " );
     	  			double num2 = scanner.nextDouble();
     	  			Result[] result_to_grade = new_student_list[num-1].getResult();
-    	  			for (Result result2: result_to_grade){
+    	  			for(Result result2: result_to_grade){
           	     	if (result2.getCourse().getCourseName() == courselist[list_num-1].getCourseName()){
           			result2.setMark(num2);
           			break;
@@ -118,11 +126,12 @@ public class TestLecturerGrading {
           	    }
           	    double new_marks = 0;
           	    for (Result result2: result_to_grade){
-          	     	if (result2.getCourse().getCourseName() == courselist[list_num-1].getCourseName()){
+          	     	 if(result2 != null && result2.getCourse() != null && courselist[list_num-1] != null && result2.getCourse().getCourseName().equals(courselist[list_num-1].getCourseName())){
           			new_marks = result2.getMark();
           	     	}
           	    }
           	    System.out.println("Student Name :" + new_student_list[num-1].getName() + "\tNew Marks :" + new_marks);
+          	    System.out.println("------------------------------------------------");
     	  		case 2: 
     	  			end1 = true;
     	  		

@@ -6,15 +6,16 @@ import java.time.LocalTime;
 import java.util.Scanner;
 
 public class lectureinput {
-    public static void main(String[] args) {
+	static int examCount = Exam.getNumberOfExamination(); // Track how many exams we have
+	
+    public static void addExam(Exam[] exams) {
         Scanner scanner = new Scanner(System.in);
         
         // Initialize exam array with 3 dummy exams
-        Exam[] exams = new Exam[10];
-        exams[0] = new Exam("EXM001", "2023-12-15", "09:00", 2.5, "Hall A");
-        exams[1] = new Exam("EXM002", "2023-12-16", "14:00", 3.0, "Hall B");
-        exams[2] = new Exam("EXM003", "2023-12-17", "10:30", 2.0, "Hall C");
-        int examCount = 3; // Track how many exams we have
+      //  Exam[] exams = new Exam[10];
+     //   exams[0] = new Exam("EXM001", "2023-12-15", "09:00", 2.5, "Hall A");
+      //  exams[1] = new Exam("EXM002", "2023-12-16", "14:00", 3.0, "Hall B");
+      //  exams[2] = new Exam("EXM003", "2023-12-17", "10:30", 2.0, "Hall C");
         
         System.out.println("=== Lecturer Exam Management System ===");
         System.out.println("Currently have " + examCount + " exams in system.");
