@@ -15,7 +15,7 @@ public class Result {
         this.resultID = resultID;
         this.course = course;
         this.mark = mark;
-		this.grade = calcGrade(mark);
+		grade = calcGrade(mark);
     }
 
     // setters
@@ -28,8 +28,8 @@ public class Result {
     }
 
     public void setMark(double mark) {
-        this.mark = mark;;
-       	this.grade = calcGrade(mark);
+        this.mark = mark;
+       	calcGrade(mark);
     }
 
     // getters
@@ -41,7 +41,7 @@ public class Result {
         return this.course;
     }
 
-    public double getMarks() {
+    public double getMark() {
         return this.mark;
     }
     public String getGrade(){
@@ -50,14 +50,12 @@ public class Result {
     
     // calculation methods
     public String calcGrade(double mark) {
-    	String grade = "";
-        if(mark >= 90) grade = "A+";
-        else if(mark >= 80) grade = "A";
-        else if(mark >= 70) grade = "A-";
-        else if(mark >= 60) grade = "B";
-        else if(mark >= 50) grade = "C";
-        else grade = "F";
-        return grade;
+        if(mark >= 90) return "A+";
+        else if(mark >= 80) return "A";
+        else if(mark >= 70) return "A-";
+        else if(mark >= 60) return "B";
+        else if(mark >= 50) return "C";
+        else return "F";
     }
     
     // tostring
