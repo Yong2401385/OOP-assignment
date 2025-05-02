@@ -14,16 +14,18 @@ public class Student extends Person {
     private double CGPA = 0;
 
     // constructor
+    public Student(){
+    	this("", "", "", "", 0, new Course[5], new Programme(), new Result[5], new Exam[5]);
+    }
     public Student(String name, String email, String contactNo, String studentID, int yearOfStudy, Course[] courseList, Programme programme, Result[] result, Exam[] examList) {
         super(name, email, contactNo);
         this.studentID = studentID;
         this.yearOfStudy = yearOfStudy;
         this.courseList = courseList != null ? Arrays.copyOf(courseList, courseList.length) : new Course[0];
         this.programme = programme;
-        this.result = result;
         this.result = result != null ? Arrays.copyOf(result, result.length) : new Result[0];
         this.examList = examList != null ? Arrays.copyOf(examList, examList.length) : new Exam[0];
-        this.GPA = calcGPA(result);
+        calcGPA(result);
         this.CGPA += GPA;
     }
 
@@ -114,22 +116,22 @@ public class Student extends Person {
     }
     
     //calcGPA
-    public double calcGPA(Result[] result){
+    public void calcGPA(Result[] result){
     	double total = 0;
+    	String grade;
     	for(Result res: result){
-    		String grade = res.getGrade();
+    		grade = res.getGrade();
     		if(grade == "A+" || grade == "A") total += 4.0;
     		else if(grade == "A-") total += 3.67;
     		else if(grade == "B") total += 3.0;
     		else if(grade == "C") total += 2.0;
-    		else if(grade == "F") total += 0.0;
+    		else total += 0.0;
     	}
     	double length = result.length;
     	if(length == 0){
     		this.GPA = 0.0;
     	}
-    	double GPA = total/length;
-    	return GPA;
+    	this.GPA = total/length;
     }
     
     @Override
