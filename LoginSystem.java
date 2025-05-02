@@ -266,13 +266,13 @@ public class LoginSystem {
                 viewProgramme();
                 break;
             case 2:
-                viewCourses();
+//              viewCourses();
                 break;
             case 3:
                 viewExamTimetable();
                 break;
             case 4:
-                addCocurricularCourse();
+//                addCocurricularCourse();
                 break;
             case 5:
                 viewResults();
@@ -335,8 +335,8 @@ public class LoginSystem {
     /**
      * View registered courses
      */
-    private static void viewCourses() {
-        Course[] courses = currentUser.getCourseList();
+    public static void viewCourses(Student student) {
+        Course[] courses = student.getCourseList();
         
         System.out.println("\n===== Registered Courses =====");
         if (courses.length == 0) {
@@ -391,14 +391,15 @@ public class LoginSystem {
     /**
      * Add a co-curricular course
      */
-    private static void addCocurricularCourse() {
+    public static void addCocurricularCourse(Student student, Course[] cocurricularCourses) {
         System.out.println("\n===== Add Co-curricular Course =====");
         System.out.println("Available Co-curricular Courses:");
-        
+        int i = 0;
         // Display available co-curricular courses
-        for (int i = 0; i < cocurricularCourses.length; i++) {
-            Course course = cocurricularCourses[i];
-            System.out.println((i+1) + ". " + course.getCourseID() + " - " + course.getCourseName());
+        for (Course cocu: cocurricularCourses) {
+        	if(cocu != null)
+            System.out.println((i+1) + ". " + cocu.getCourseID() + " - " + cocu.getCourseName());
+            i++;
         }
         
         System.out.print("\nEnter the number of the course to add (or 0 to cancel): ");
@@ -409,7 +410,7 @@ public class LoginSystem {
             
             // Check if already registered
             boolean alreadyRegistered = false;
-            for (Course course : currentUser.getCourseList()) {
+            for (Course course : student.getCourseList()) {
                 if (course != null && course.getCourseID().equals(selectedCourse.getCourseID())) {
                     alreadyRegistered = true;
                     break;
@@ -419,7 +420,7 @@ public class LoginSystem {
             if (alreadyRegistered) {
                 System.out.println("You are already registered for this course.");
             } else {
-                currentUser.registerCourse(selectedCourse);
+                student.registerCourse(selectedCourse);
                 System.out.println("Successfully registered for " + selectedCourse.getCourseName() + "!");
             }
         } else if (choice != 0) {
@@ -473,7 +474,7 @@ public class LoginSystem {
                 Course course = result.getCourse();
                 System.out.printf("%-10s %-40s %-10.2f %-10s\n", 
                     course.getCourseID(), course.getCourseName(), 
-                    result.getMarks(), result.getGrade());
+                    result.getMark(), result.getGrade());
             }
         }
         
