@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class registerCourse{
-	 private static Scanner scanner = new Scanner(System.in);
+	 private static Scanner scanner = UniversityExaminationSystem.scanner;
 	
 	public static void viewCourses(Student student) {
         Course[] courses = student.getCourseList();

@@ -138,7 +138,7 @@ public class UniversityExaminationSystem{
 				switch(input){
 					case 1: checkStudResult(lecturer, studArr); break;
 					case 2: scheduleNewExam(examArr); break;
-					case 3: again = false; return;
+					case 3: again = false; break;
 				}
 			}while(again);
 	}

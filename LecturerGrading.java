@@ -13,7 +13,7 @@ import java.util.Arrays;
 public class LecturerGrading {
 
      public static void grade(Lecturer lecturer, Student[] student_list){
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = UniversityExaminationSystem.scanner;
     	System.out.println("Courses Taught:");
     	//generate a courselist for this specific lecturer
     	Course[] courselist = lecturer.getCourseTaught();

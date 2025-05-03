@@ -9,7 +9,7 @@ public class lecturerAddExam {
 	static int examCount = Exam.getNumberOfExamination(); // Track how many exams we have
 	
     public static void addExam(Exam[] exams) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = UniversityExaminationSystem.scanner;
         
         System.out.println("=== Lecturer Exam Management System ===");
         System.out.println("Currently have " + examCount + " exams in system.");
@@ -76,7 +76,6 @@ public class lecturerAddExam {
                     
                 case 3:
                     System.out.println("Exiting system...");
-                    scanner.close();
                     return;
                     
                 default:
