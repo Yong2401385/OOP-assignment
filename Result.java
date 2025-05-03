@@ -4,25 +4,19 @@
 import java.util.Arrays;
 
 public class Result {
-    private String resultID;
     private Course course;
     private double mark;
     private String grade;
     //private double totalMark;
 
     // constructor
-    public Result(String resultID, Course course, double mark) {
-        this.resultID = resultID;
+    public Result(Course course, double mark) {
         this.course = course;
         this.mark = mark;
 		grade = calcGrade(mark);
     }
 
     // setters
-    public void setResultID(String resultID) {
-        this.resultID = resultID;
-    }
-
     public void setCourse(Course course) {
         this.course = course;
     }
@@ -33,10 +27,6 @@ public class Result {
     }
 
     // getters
-    public String getResultID() {
-        return resultID;
-    }
-
     public Course getCourse() {
         return this.course;
     }
@@ -60,7 +50,6 @@ public class Result {
     
     // tostring
     public String toString() {
-        return "\nResultID: " + resultID +
-        	   "\n" + course.getCourseID() + " " + course.getCourseName() + ": " + mark + "%";
+        return "\n" + course.getCourseID() + " " + course.getCourseName() + ": " + mark + "%";
     }
 }
