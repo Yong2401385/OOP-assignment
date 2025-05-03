@@ -8,7 +8,7 @@ public class Programme {
 	private String programmeLeader;
 	private int programmeDuration;
 	private Course[] courseList;
-	private static int courseCount; // Track number of courses added
+	private static int courseCount = 0; // Track number of courses added
 	
 	// constructors
 	public Programme(){
@@ -20,7 +20,6 @@ public class Programme {
 		this.programmeLeader = programmeLeader;
 		this.programmeDuration = programmeDuration;
 		this.courseList = new Course[15];
-		courseCount = 0;
 	}
 	
 	// setter
@@ -38,7 +37,6 @@ public class Programme {
 			this.courseList = Arrays.copyOf(courseList, Math.min(courseList.length, 15));
 			courseCount = countCourses();
 		}
-		
 	}
 	
 	// getter

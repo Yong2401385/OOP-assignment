@@ -84,7 +84,7 @@ public class Exam {
 	public String getVenue(){
 		return venue;
 	}
-	public int getNumberOfExamination(){
+	public static int getNumberOfExamination(){
 		return numberOfExamination;
 	}
 	//toStirng
