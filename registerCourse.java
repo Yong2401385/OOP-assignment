@@ -34,13 +34,13 @@ public class registerCourse{
     }
     
     /**
-     * Add a cular course
+     * Add a co-curricular course
      */
     public static void addCourse(Student student, Course[] courses) {
-        System.out.println("\n===== Add Course =====");
-        System.out.println("Available Courses:");
+        System.out.println("\n===== Add Co-curricular Course =====");
+        System.out.println("Available Co-curricular Courses:");
         int i = 0;
-        // Display available courses
+        // Display available co-curricular courses
         for (Course cour: courses) {
         	if(cour != null)
             System.out.println((i+1) + ". " + cour.getCourseID() + " - " + cour.getCourseName());
@@ -66,6 +66,21 @@ public class registerCourse{
                 System.out.println("You are already registered for this course.");
             } else {
                 student.registerCourse(selectedCourse);
+                
+                // Create and add a new Result object
+        		Result[] currentResults = student.getResult();
+        		Result[] newResults = Arrays.copyOf(currentResults, currentResults.length + 1);
+        
+        		// Generate a unique resultID (you can create a better system)
+        		String resultID = "R" + (currentResults.length + 1);
+        
+        		// Create new Result with 0.0 mark initially
+        		Result newResult = new Result(resultID, selectedCourse, 0.0);
+        		newResults[currentResults.length] = newResult;
+        
+        		// Update student's results
+        		student.setResult(newResults);
+                
                 System.out.println("Successfully registered for " + selectedCourse.getCourseName() + "!");
             }
         } else if (choice != 0) {

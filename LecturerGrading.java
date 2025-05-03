@@ -1,3 +1,4 @@
+
 /**
  * @(#)LecturerGrading.java
  *
@@ -82,30 +83,44 @@ public class LecturerGrading {
     	  			int num = scanner.nextInt();
     	  			System.out.println("How many marks?: " );
     	  			double num2 = scanner.nextDouble();
-    	  			Result[] result_to_grade = new_student_list[num-1].getResult();
-    	  			for(Result result2: result_to_grade){
-          	     	if (result2.getCourse().getCourseName() == courselist[list_num-1].getCourseName()){
-          			result2.setMark(num2);
-          			break;
-          	     	}
-          	    }
-          	    double new_marks = 0;
-          	    for (Result result2: result_to_grade){
-          	     	 if(result2 != null && result2.getCourse() != null && courselist[list_num-1] != null && result2.getCourse().getCourseName().equals(courselist[list_num-1].getCourseName())){
-          			new_marks = result2.getMark();
-          	     	}
-          	    }
-          	    System.out.println("Student Name :" + new_student_list[num-1].getName() + "\tNew Marks :" + new_marks);
-          	    System.out.println("------------------------------------------------");
-    	  		case 2: 
-    	  			end1 = true;
-    	  		
-    	  	}
-    	  	
-    	  	
-    }while(end1 == false);
+    	  			
+    	  			Student studentToGrade = new_student_list[num-1];
+    				Result[] results = studentToGrade.getResult();
+    				boolean markUpdated = false;
     
-}
-
+    				for (int j = 0; j < results.length; j++) {
+        				Result result = results[j];
+        				if (result != null && result.getCourse() != null && 
+            				result.getCourse().getCourseName().equals(courselist[list_num-1].getCourseName())) {
+            
+            				result.setMark(num2);
+            				markUpdated = true;
+            				System.out.println("Student Name: " + studentToGrade.getName() + "\tNew Marks: " + num2);
+            				break;
+        				}
+    				}
     
+    				if (!markUpdated) {
+        				// If no result found for this course, create a new one
+        				String resultID = "R" + (results.length + 1);
+        				Result newResult = new Result(resultID, courselist[list_num-1], num2);
+        
+        				Result[] newResults = Arrays.copyOf(results, results.length + 1);
+        				newResults[results.length] = newResult;
+        				studentToGrade.setResult(newResults);
+        
+        				System.out.println("Created new result entry.");
+        				System.out.println("Student Name: " + studentToGrade.getName() + "\tNew Marks: " + num2);
+    				}
+    				break;
+    				
+    				case 2:
+    				end1 = true; // Set flag to exit the loop
+    				break;
+    				
+    			default:
+    				System.out.println("Invalid choice. Please enter 1 or 2.");
+    	  			}
+    		} while(!end1);
+	}
 }

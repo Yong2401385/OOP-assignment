@@ -96,15 +96,32 @@ public class Student extends Person {
     public void registerCourse(Course course) {
         if (course == null) return;
 
+		// Check if course is already registered
         for (Course c : courseList) {
             if (c != null && c.getCourseID().equals(course.getCourseID())) {
                 return;
             }
         }
 
-        Course[] newList = Arrays.copyOf(courseList, courseList.length + 1);
-        newList[newList.length - 1] = course;
-        courseList = newList;
+		// Add to courseList
+        Course[] newCourseList = Arrays.copyOf(courseList, courseList.length + 1);
+    	newCourseList[newCourseList.length - 1] = course;
+    	courseList = newCourseList;
+    	
+    	// Add exam to examList if not already there
+    	boolean examExists = false;
+    	for (Exam e : examList) {
+        	if (e != null && e.getExamID().equals(course.getExam().getExamID())) {
+            	examExists = true;
+            	break;
+        	}
+    	}
+    	
+    	if (!examExists) {
+        	Exam[] newExamList = Arrays.copyOf(examList, examList.length + 1);
+        	newExamList[newExamList.length - 1] = course.getExam();
+        	examList = newExamList;
+    	}
     }
     
     // unregister course
