@@ -60,6 +60,9 @@ public class Course {
 	public Exam getExam(){
 		return exam;
 	}
+	public static int getNumberOfCourses(){
+		return numberOfCourses;
+	}
 	//toString
 	public String toString(){
 		return "\nCourseID : " + courseID
