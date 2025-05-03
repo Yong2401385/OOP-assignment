@@ -29,7 +29,7 @@ public class Result {
 
     public void setMark(double mark) {
         this.mark = mark;
-       	calcGrade(mark);
+       	this.grade = calcGrade(mark);
     }
 
     // getters
