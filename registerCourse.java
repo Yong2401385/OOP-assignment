@@ -34,13 +34,13 @@ public class registerCourse{
     }
     
     /**
-     * Add a co-curricular course
+     * Add a cular course
      */
     public static void addCourse(Student student, Course[] courses) {
-        System.out.println("\n===== Add Co-curricular Course =====");
-        System.out.println("Available Co-curricular Courses:");
+        System.out.println("\n===== Add Course =====");
+        System.out.println("Available Courses:");
         int i = 0;
-        // Display available co-curricular courses
+        // Display available courses
         for (Course cour: courses) {
         	if(cour != null)
             System.out.println((i+1) + ". " + cour.getCourseID() + " - " + cour.getCourseName());
