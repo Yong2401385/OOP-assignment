@@ -1,4 +1,3 @@
-
 /**
  * @(#)LecturerGrading.java
  *
@@ -102,8 +101,7 @@ public class LecturerGrading {
     
     				if (!markUpdated) {
         				// If no result found for this course, create a new one
-        				String resultID = "R" + (results.length + 1);
-        				Result newResult = new Result(resultID, courselist[list_num-1], num2);
+        				Result newResult = new Result(courselist[list_num-1], num2);
         
         				Result[] newResults = Arrays.copyOf(results, results.length + 1);
         				newResults[results.length] = newResult;

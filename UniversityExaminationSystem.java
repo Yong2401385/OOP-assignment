@@ -48,14 +48,14 @@ public class UniversityExaminationSystem{
 		progArr[0] = p1;
 		progArr[1] = p2;
 		
-		Result r1 = new Result("R1", courArr[0], 100.00);
-		Result r2 = new Result("R2", courArr[1], 90.00);
-		Result r3 = new Result("R3", courArr[2], 80.00);
-		Result r4 = new Result("R4", courArr[3], 70.00);
-		Result r5 = new Result("R5", courArr[4], 60.00);
-		Result r6 = new Result("R6", courArr[4], 75.00);
-		Result r7 = new Result("R7", courArr[4], 90.00);
-		Result r8 = new Result("R8", courArr[5], 100.00);
+		Result r1 = new Result(courArr[0], 100.00);
+		Result r2 = new Result(courArr[1], 90.00);
+		Result r3 = new Result(courArr[2], 80.00);
+		Result r4 = new Result(courArr[3], 70.00);
+		Result r5 = new Result(courArr[4], 60.00);
+		Result r6 = new Result(courArr[4], 75.00);
+		Result r7 = new Result(courArr[4], 90.00);
+		Result r8 = new Result(courArr[5], 100.00);
 
 		Lecturer[] lectArr = new Lecturer[10];
 		lectArr[0] = new Lecturer("Dr. Lee Ming", "leeming@lecturer.tarc.edu.my", "012345678", "0001", new Course[] {courArr[4]}, new Exam[] {examArr[0], examArr[1], examArr[2]});
@@ -155,7 +155,7 @@ public class UniversityExaminationSystem{
 		LecturerGrading.grade(lecturer, studArr);
 	}
 	
-	public static void studentModule(Student[] studArr, Course[] cocuArr){
+	public static void studentModule(Student[] studArr, Course[] courArr){
 		int input = 0;
 		boolean continueInput = true;
 		boolean again = true;
@@ -186,7 +186,7 @@ public class UniversityExaminationSystem{
 			
 			switch(input){
 				case 1: checkResult(student); break;
-				case 2: registerCourse(student, cocuArr); break;
+				case 2: registerCourse(student, courArr); break;
 				case 3: again = false; return;
 			}
 		}while(again);
@@ -203,7 +203,9 @@ public class UniversityExaminationSystem{
 		}
 		for(Result result: results){
 			if(result != null && result.getCourse() != null && result.getMark() != 0 && result.getGrade() != null)
-			System.out.printf("%-10s %-40s %-10s %-10s\n", result.getCourse().getCourseID(), result.getCourse().getCourseName(), result.getMark(), result.getGrade());
+				System.out.printf("%-10s %-40s %-10s %-10s\n", result.getCourse().getCourseID(), result.getCourse().getCourseName(), result.getMark(), result.getGrade());
+			else
+				System.out.println("Unable to display");
 		}
 		System.out.println("--------------------------------------------------------------------");
 		System.out.printf("%-60s %5.2f", "GPA: ", student.getGPA());
@@ -220,9 +222,9 @@ public class UniversityExaminationSystem{
 		throw new IllegalArgumentException("Student Not Found");
 	}		
 		
-	private static void registerCourse(Student student, Course[] cocuArr){
+	private static void registerCourse(Student student, Course[] courArr){
 		registerCourse.viewCourses(student);
-		registerCourse.addCourse(student, cocuArr);
+		registerCourse.addCourse(student, courArr);
 	}
 	
 	private static void scheduleNewExam(Exam[] examArr){
