@@ -79,7 +79,15 @@ public class LecturerGrading {
     	  	switch(CHOICE){
     	  		case 1:
     	  			System.out.println("Which student to grade?(number in list): " );
-    	  			int num = scanner.nextInt();
+    	  			int num = 0;
+    	  			boolean loop = true;
+    	  			do{
+	    	  			num = scanner.nextInt();
+	    	  			if(num > 0 && num <= iii) 
+	    	  				loop = false;
+	    	  			else 
+	    	  				System.out.println("Not a student in the list. Please try again");
+    	  			}while(loop);
     	  			System.out.println("How many marks?: " );
     	  			double num2 = scanner.nextDouble();
     	  			

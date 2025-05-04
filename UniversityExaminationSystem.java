@@ -207,6 +207,7 @@ public class UniversityExaminationSystem{
 			else
 				System.out.println("Unable to display");
 		}
+		student.calcGPA(results);
 		System.out.println("--------------------------------------------------------------------");
 		System.out.printf("%-60s %5.2f", "GPA: ", student.getGPA());
 		System.out.printf("\n%-60s %5.2f", "CGPA: ", student.getCGPA());

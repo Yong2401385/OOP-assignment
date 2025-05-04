@@ -152,6 +152,7 @@ public class Student extends Person {
     		this.GPA = 0.0;
     	}
     	this.GPA = total/length;
+    	this.CGPA = this.GPA;
     }
     
     @Override
